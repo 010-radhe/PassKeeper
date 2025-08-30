@@ -29,7 +29,7 @@ Now, the server will be up and running
 Structure of the config.env file
 
 ```js
-DATABASE=<your MongoDB URI>
+DATABASE=<your MongoDB URI>           e.g DATABASE=mongodb://localhost:27017/password-manager
 SECRET_KEY=<your secret key for hashing passwords>
 CRYPTO_SECRET_KEY=<your secret key for encrypting passwords while saving in db>
 ```
