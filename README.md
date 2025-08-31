@@ -20,7 +20,7 @@ npm install
 After installing all the server dependencies run the server using the following command 
 
 ```sh
-npm run dev:start
+nodemon app.js
 ```
 Now, the server will be up and running
 
@@ -43,7 +43,7 @@ npm install
 All the dependencies should be installed. Now, you just have to start the React server by following command
 
 ```sh
-nodemon app.js
+npm start
 ```
 ### You also have to keep the mongodb cluster open in order to run the app properly.
 
