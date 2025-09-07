@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "./Password.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -6,37 +6,27 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { decryptThePass, deleteAPassword } from "../../axios/instance";
-import { delPass } from "../../redux/actions";
+// import { delPass } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { passwordContext } from '../../store/Context/PasswordContextProvider';
 
 function Password({ id, name, password, email, iv })
 {
     const [show, setShow] = useState(false);
     const [decPassword, setDecPassword] = useState("");
-
-    const dispatch = useDispatch();
-
+ 
+    const {deleteAPassword:delPass}=useContext(passwordContext);
     const deletePassword = async () =>
     {
         try
         {
             const res = await deleteAPassword({ id });
 
-            if (res.status === 400)
+            if (res.status === 200)
             {
-                toast.error(res.data.error, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            }
-            else if (res.status === 200)
-            {
-                dispatch(delPass(id));
+                console.log("in aff pass");
+                
+                delPass(id);
                 toast.success(res.data.message, {
                     position: "top-right",
                     autoClose: 5000,
@@ -48,9 +38,18 @@ function Password({ id, name, password, email, iv })
                 });
             }
         }
-        catch (err)
+        catch (error)
         {
-            console.log(err)
+            toast.error(error, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            console.log(error)
         }
 
     }

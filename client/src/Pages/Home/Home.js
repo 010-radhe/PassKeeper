@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import "./Home.css";
 import { useSelector } from "react-redux";
+import { passwordContext } from '../../store/Context/PasswordContextProvider';
 
 function Home()
 {
-    const { name, isAuthenticated } = useSelector(state => state);
-
+    const { state } = useContext(passwordContext) 
+     const {isAuthenticated,name}=state
+     
+    console.log("isAuthenticated ",isAuthenticated);
+    console.log("name ",name);
+    
     return (
         <div className="home">
 

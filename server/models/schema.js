@@ -101,5 +101,5 @@ schema.methods.addNewPassword = async function (userPass, iv, platform, platEmai
     }
 }
 
-const User = mongoose.model("user-data", schema);
+const User = mongoose.model("users-data", schema);
 module.exports = User;

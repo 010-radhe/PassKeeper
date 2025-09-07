@@ -2,42 +2,36 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/schema");
 const { decrypt } = require("../models/EncDecManager");
 
-const authenticate = async (req, res, next) =>
-{
-    // console.log("in authenticate");
-    
-    try
-    {
-        const token = req.cookies.jwtoken;
-        // console.log("token is ",token)
-        const verify = jwt.verify(token, process.env.SECRET_KEY);
-        // console.log("verify ",verify);/
-        
-        var rootUser = await User.findOne({ _id: verify._id, "tokens.token": token });
+const authenticate = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwtoken;
 
-        if (!rootUser)
-        {
-            throw new Error("User now found");
-        }
-
-        console.log(rootUser.name);
-
-        return res.send("HEllo")
-
-        req.token = token;
-        req.rootUser = rootUser;
-        req.userId = rootUser._id;
-
-        next();
+    if (!token) {
+      return res.status(401).json({ error: "No token provided, unauthorized user." });
     }
-    catch (error)
-    {
-         
-        return  res.status(400).json({error: "Unauthorised user."})
-       
+
+    const verify = jwt.verify(token, process.env.SECRET_KEY);
+
+    const rootUser = await User.findOne({ 
+      _id: verify._id, 
+      "tokens.token": token 
+    });
+
+    if (!rootUser) {
+      return res.status(401).json({ error: "User not found, unauthorized." });
     }
-    
+
+    // attach user info to request
+    req.token = token;
+    req.rootUser = rootUser;
+    req.userId = rootUser._id;
+
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token, unauthorized." });
+  }
 };
+
 
 
 module.exports = authenticate;

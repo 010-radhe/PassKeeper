@@ -14,5 +14,7 @@ mongoose.connect(DB, {
 })
 .catch((error) =>
 {
+    console.log("DB Connection failed.");
+    
     console.log(error)
 })

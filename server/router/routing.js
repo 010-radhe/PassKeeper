@@ -33,11 +33,11 @@ router.post("/register", async (req, res) =>
                 }
 
                 const newUser = new User({ name, email, password, cpassword });
-                console.log("new uses ",newUser);
+                
                 
                 // hashing the password
                 await newUser.save();
-
+console.log("new user added ",newUser);
                 return res.status(200).json({ message: "User created succressfully.",
                     data:newUser
                  })
@@ -106,23 +106,21 @@ router.post("/login", async (req, res) =>
     }
 
 })
-  
+
 router.get("/authenticate", authenticate, async (req, res) =>
 {
-    // console.log("sending ",req.rootUser);
-    // console.log("*******************************************");
-    
     res.send(req.rootUser);
 })
 
 router.post("/addnewpassword", authenticate, async (req, res) =>
 {
+console.log("add new password called ");
 
-    return res.status(200).json({
-        message:"sucesssssss"
-    })
+
+     
     const { platform, userPass, userEmail, platEmail } = req.body;
-    // console.log("in addnes ",req.body);
+    
+    console.log("body ",req.body);
     
     if (!platform || !userPass || !userEmail || !platEmail)
     {
