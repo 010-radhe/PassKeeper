@@ -1,84 +1,133 @@
-# Password Manager 💙
+ 
 
-A Password Manager project created using the MERN stack.
-You can login and save your passwords. Passwords are saved in the database after AES encryption ⛓️ . So, your passwords are safe here. 🦺
+# 🔐 PassKeeper – Your Friendly Password Manager
 
-<a id="setting">
-<h2>Setting up the project</h2>
+A simple yet powerful **MERN Stack Password Manager** 💙 where you can securely store your passwords.
+All your secrets are encrypted with **AES-256** before saving them in the database ⛓️ – so even if someone sneaks into the DB, your passwords will still be safe. 🦺
+
+---
+
+## 🚀 Features
+
+* 🔑 **Token-based Authentication** (JWT) – No random stranger gets in.
+* 🗝️ **AES-256 Encryption** – Your passwords are stored securely.
+* 🖥️ **MERN Stack** – Built with MongoDB, Express, React, Node.
+* 🌐 **CORS Configured** – So client ↔ server communication works smoothly.
+* 🛡️ **Environment Configurable** – Set up with your own DB, secrets, and keys.
+
+---
+
+<a id="setup">
+<h2>🛠️ Setting up the Project</h2>
 </a>
-Go to the folder in which you want to clone the project and run the following command
 
+Clone the repo to your system:
 
-### Setting up the server
-To setup the server in your system run the following commands
+```sh
+git clone https://github.com/010-radhe/PassKeeper.git
+cd PassKeeper
+```
+
+---
+
+## ⚡ Server Setup
+
+1. Go inside the server folder
 
 ```sh
 cd server
+```
+
+2. Create a file named **`config.env`** in the root of the `server` folder.
+
+   Example content of `config.env` 👇
+
+   ```env
+   DATABASE=mongodb://localhost:27017/password-manager
+   SECRET_KEY=hello radhe
+   CRYPTO_SECRET_KEY=12345678901234567890123456789012
+   CLIENT_URL1=http://localhost:3000
+   ```
+
+   ✅ **Important Notes**:
+
+   * `DATABASE` → MongoDB connection string (local or Atlas).
+   * `SECRET_KEY` → Secret used for JWT tokens.
+   * `CRYPTO_SECRET_KEY` → Must be **exactly 32 characters** long (spaces also count).
+   * `CLIENT_URL1` → Client URL for CORS setup.
+
+3. Install server dependencies
+
+```sh
 npm install
 ```
 
-After installing all the server dependencies run the server using the following command 
+4. Start the server (with hot-reload using nodemon)
 
 ```sh
-npm run dev:start
-```
-Now, the server will be up and running
-
-**Note :- You have to configure all the environment variables by creating a config.env file in root server folder.
-
-Structure of the config.env file
-
-```js
-DATABASE=<your MongoDB URI>
-SECRET_KEY=<your secret key for hashing passwords>
-CRYPTO_SECRET_KEY=<your secret key for encrypting passwords while saving in db>
+nodemon app.js
 ```
 
-### Setting up the client
-Go to the client folder and run 
+Now your backend is alive 🚀
+
+---
+
+## ⚡ Client Setup
+
+1. Go inside the client folder
+
+```sh
+cd client
+```
+
+2. Install client dependencies
 
 ```sh
 npm install
 ```
-All the dependencies should be installed. Now, you just have to start the React server by following command
+
+3. Start the React app
 
 ```sh
 npm start
 ```
-### You also have to keep the mongodb cluster open in order to run the app properly.
 
-# How to contribute?
-This project is completely open source. Everyone's contribution is welcome here.
-The following are guidelines for contributing to this project.
+Now your frontend is alive 🎉
 
-### 🚩 New Issue : 
-For any bug or a new feature please open an issue [here](https://github.com/rockingrohit9639/password-manager-mern/issues/new)
+---
 
-### 🚩 Forking repository :
-Firstly you have to make your own copy of the project. For that, you have to fork the repository. You can find the fork button on the top-right side of the browser window. (Refer to the image below )
-Kindly wait till it gets forked.
-After that copy will look like <your-user-name>/password-manager-mern forked from rockingrohit/password-manager-mern.
+## 🧑‍💻 Development Flow
 
-### 🚩 Clone repository :
-Now you have your own copy of the project. Here you have to start your work.
-Go to the desired location on your computer where you want to set up the project.
-Right-click there and click on git bash. A terminal window will pop up
-Type the command git clone <your-fork-url>.git and hit enter.
-Wait for few seconds till the project gets copied
-  
-### Setup the project given at the top of this readme file. [here](#setting)
+* Start **server** first → `nodemon app.js`
+* Start **client** next → `npm start`
 
-### 🚩 Pushing your changes :
-After doing the changes, and when tests are successfully passing you can push your changes to remote.
-Go to your terminal and type git status and hit enter, this will show your changes from the files.
-Then type in git add . and hit enter, this will add all the files to the staging area.
-Commit the changes by git commit -m "<message-describing-your-change>" and hit enter.
-Now push your branch to your fork by git push origin <your-branch-name> or git push and hit enter.
+Both must run together for the app to function properly.
 
-### 📌 Creating a pull request : 
-By this time you can see a message on your GitHub fork as your fork is ahead of rockingrohit9639: master by <number> of commits and you can also see a button Compare and pull request.
-Click on Compare and pull request button
-Fill the form completely by describing your change, cause of change, issue getting fixed etc.
-After filling the form completely click on Create Pull request
-  
-Then your work is done. Thank you for your submissions. I will review your code and merge it.
+---
+
+## 🤝 How to Contribute?
+
+We welcome contributions from everyone 👐
+
+* 🐞 Found a bug? Open an [issue](https://github.com/010-radhe/PassKeeper/issues/new).
+* 🌟 Want to add a new feature? Fork → Clone → Branch → Code → Commit → PR.
+* 🔄 Always make sure your code is tested and clean before pushing.
+
+---
+
+## 📌 Future Enhancements
+
+* 📲 Add multi-device sync
+* 🔐 Biometric/2FA login
+* 📊 Dashboard with password strength analytics
+
+---
+
+## 🎯 Final Words
+
+This project is open source and made with ❤️ to help you **never forget your passwords again**.
+Be safe, code safe, and keep your passwords safer! 🔒
+
+---
+
+👉 Would you like me to also add a **project architecture diagram (folder structure)** in the README so contributors instantly understand the flow?
